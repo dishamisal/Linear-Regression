@@ -2,6 +2,7 @@
 
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt  
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
@@ -43,8 +44,31 @@ print("Predicted Salary:\n ", y_predicted)
 
 print("Prediction Accuracy: ", metrics.r2_score(y_test, y_predicted))
 
+#To get the intercept
+print(regressor.intercept_)
+
+#To get the slope
+print(regressor.coef_)
+
 
 
 #Calculating the difference between actual and predicted salaries
 
 print("Difference :\n", y_predicted-y_test)
+
+#Actual vs Predicted salaries visualization
+
+df = pd.DataFrame({'Actual': y_test.flatten(), 'Predicted': y_predicted.flatten()})
+df1 = df.head(20)
+df1.plot(kind='bar',figsize=(16,10))
+plt.grid(which='major', linestyle='-', linewidth='0.5', color='green')
+plt.grid(which='minor', linestyle=':', linewidth='0.5', color='black')
+plt.show()
+
+
+
+#Straight line with test data
+
+plt.scatter(x_test, y_test,  color='gray')
+plt.plot(x_test, y_predicted, color='red', linewidth=2)
+plt.show()
